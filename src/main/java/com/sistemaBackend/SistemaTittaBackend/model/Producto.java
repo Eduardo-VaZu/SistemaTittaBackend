@@ -1,17 +1,21 @@
 package com.sistemaBackend.SistemaTittaBackend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tbl_producto")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
-    private int idProducto;
+    private Long idProducto;
 
     @Column(name = "nombre_producto", nullable = false, unique = true, length = 100)
     private String nombreProducto;
