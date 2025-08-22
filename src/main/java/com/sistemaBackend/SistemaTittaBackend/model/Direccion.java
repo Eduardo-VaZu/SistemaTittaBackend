@@ -20,15 +20,15 @@ public class Direccion {
     @Column(name = "calle")
     private String calle;
 
-    @Column(name = "numero_exterior")
+    @Column(name = "numero_exterior", length = 20)
     private String numeroExterior;
 
-    @Column(name = "codigo_postal")
+    @Column(name = "codigo_postal", length = 20)
     private String codigoPostal;
 
-    @Column(name = "ciudad")
+    @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
-    @Column(name = "estado_provincial")
+    @Column(name = "estado_provincial", nullable = false)
     private String estadoProvincial;
 }
