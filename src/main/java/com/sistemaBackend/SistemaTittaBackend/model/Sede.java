@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbl_sede")
+@Table(name = "tbl_sedes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,10 +25,10 @@ public class Sede {
     @Column(name = "nombre_sede", nullable = false, unique = true, length = 100)
     private String nombreSede;
 
-    @Column(name = "telefono", nullable = false, unique = true, length = 9)
+    @Column(name = "telefono", unique = true, length = 20)
     private BigInteger telefono;
 
-    @Column(name = "estado", nullable = false, length = 5)
+    @Column(name = "estado", nullable = false, length = 50)
     private Boolean estado;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbl_producto")
+@Table(name = "tbl_productos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +22,10 @@ public class Producto {
     @Column(name = "id_producto")
     private Long idProducto;
 
-    @Column(name = "nombre_producto", nullable = false, unique = true, length = 100)
+    @Column(name = "nombre_producto", nullable = false, length = 100)
     private String nombreProducto;
 
-    @Column(name = "sku", nullable = false, length = 50)
+    @Column(name = "sku", nullable = false, unique = true, length = 50)
     private String sku;
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
@@ -42,8 +42,8 @@ public class Producto {
     @EqualsAndHashCode.Exclude
     private Categoria categoria;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen")
+    @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     private ImagenProducto imagen;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)

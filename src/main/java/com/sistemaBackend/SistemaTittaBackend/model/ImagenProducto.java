@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tbl_imagen_producto")
+@Table(name = "tbl_imagen_productos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +18,12 @@ public class ImagenProducto {
     @Column(name = "id_imagen")
     private Long idImagen;
 
-    @Column(name = "url_imagen", nullable = false, unique = true, length = 200)
-    private String urlImagen;
-
-    @OneToOne(mappedBy = "imagen", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_producto", nullable = false)
     @EqualsAndHashCode.Exclude
     private Producto producto;
+
+    @Column(name = "imagenUrl", nullable = false)
+    private String imagenUrl;
+
 }
