@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbl_productos")
+@Table(name = "tbl_producto")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

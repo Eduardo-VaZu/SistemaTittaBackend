@@ -13,7 +13,7 @@ import lombok.*;
 
 
 @Entity
-@Table(name = "tbl_ventas")
+@Table(name = "tbl_venta")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

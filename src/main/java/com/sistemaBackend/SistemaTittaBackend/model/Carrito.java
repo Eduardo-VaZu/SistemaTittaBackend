@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tbl_carritos")
+@Table(name = "tbl_carrito")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
