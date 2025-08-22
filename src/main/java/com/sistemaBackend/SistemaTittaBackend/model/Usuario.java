@@ -1,8 +1,10 @@
 package com.sistemaBackend.SistemaTittaBackend.model;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
@@ -41,9 +43,16 @@ public class Usuario {
     @Column(name = "estado_usuario", nullable = false, length = 5)
     private boolean estadoUsuario;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Rol> roles;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_rol", nullable = false)
+    @EqualsAndHashCode.Exclude
+    private Role roles;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Venta> ventas;
+    @EqualsAndHashCode.Exclude
+    private Set<UsuarioSede> sedes = new HashSet<>();
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    private CredencialTradicional credencialTradicional;
 }

@@ -7,14 +7,14 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "usuarios_sedes")
+@Table(name = "tbl_usuarios_sede")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioSede {
 
     @EmbeddedId
-    private UsuarioSedeId id;
+    private UsuarioSedeId Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idUsuario")

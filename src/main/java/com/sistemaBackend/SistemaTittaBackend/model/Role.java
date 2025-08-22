@@ -4,14 +4,15 @@ import com.sistemaBackend.SistemaTittaBackend.model.enums.RolEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tbl_rol")
+@Table(name = "tbl_roles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rol {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +22,4 @@ public class Rol {
     @Column(name = "nombre_rol", nullable = false, unique = true, length = 50)
     private RolEnum nombreRol;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
 }
