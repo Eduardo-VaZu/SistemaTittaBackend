@@ -13,8 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name = "tbl_producto")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
 
     @Id
@@ -39,14 +39,14 @@ public class Producto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", nullable = false)
+    @EqualsAndHashCode.Exclude
     private Categoria categoria;
 
-    @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen")
-    @EqualsAndHashCode.Exclude
-    private Imagen imagen;
+    private ImagenProducto imagen;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
-    private Set<StockSede> stocks= new HashSet<>();
+    private Set<StockSede> stocks = new HashSet<>();
 }

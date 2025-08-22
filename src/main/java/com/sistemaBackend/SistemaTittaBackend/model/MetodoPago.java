@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tbl_metodo_pago")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class MetodoPago {
 
     @Id

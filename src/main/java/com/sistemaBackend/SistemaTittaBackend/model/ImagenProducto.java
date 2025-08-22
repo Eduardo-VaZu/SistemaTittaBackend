@@ -3,14 +3,15 @@ package com.sistemaBackend.SistemaTittaBackend.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tbl_imagen")
+@Table(name = "tbl_imagen_producto")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Imagen {
+@AllArgsConstructor
+public class ImagenProducto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +22,6 @@ public class Imagen {
     private String urlImagen;
 
     @OneToOne(mappedBy = "imagen", fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     private Producto producto;
 }

@@ -10,8 +10,8 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class StockSedeId implements Serializable {
 
     @Column(name = "id_producto")
@@ -19,4 +19,5 @@ public class StockSedeId implements Serializable {
 
     @Column(name = "id_sede")
     private Long idSede;
+
 }
