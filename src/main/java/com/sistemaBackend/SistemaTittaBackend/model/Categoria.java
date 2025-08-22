@@ -3,18 +3,15 @@ package com.sistemaBackend.SistemaTittaBackend.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "tbl_categoria")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Categoria {
 
     @Id
@@ -25,7 +22,6 @@ public class Categoria {
     @Column(name = "nombre_categoria", nullable = false, unique = true, length = 50)
     private String nombreCategoria;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
-    @EqualsAndHashCode.Exclude
-    private Set<Producto> productos = new HashSet<>();
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Producto> productos;
 }

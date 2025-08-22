@@ -2,11 +2,15 @@ package com.sistemaBackend.SistemaTittaBackend.model;
 
 import com.sistemaBackend.SistemaTittaBackend.model.enums.RolEnum;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tbl_rol")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Rol {
 
     @Id

@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tbl_estado_venta")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class EstadoVenta {
 
     @Id

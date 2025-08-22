@@ -1,16 +1,20 @@
 package com.sistemaBackend.SistemaTittaBackend.model;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tbl_usuario")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Id
@@ -38,5 +42,8 @@ public class Usuario {
     private boolean estadoUsuario;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rol> roles;
+    private Set<Rol> roles;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Venta> ventas;
 }
