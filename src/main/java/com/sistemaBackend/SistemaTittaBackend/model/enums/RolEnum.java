@@ -1,4 +1,4 @@
-package com.sistemaBackend.SistemaTittaBackend.modelo.enums;
+package com.sistemaBackend.SistemaTittaBackend.model.enums;
 
 public enum RolEnum {
     ADMINISTRADOR, CLIENTE, EMPLEADO;

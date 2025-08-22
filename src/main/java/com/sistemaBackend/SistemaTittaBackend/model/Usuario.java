@@ -1,4 +1,4 @@
-package com.sistemaBackend.SistemaTittaBackend.modelo;
+package com.sistemaBackend.SistemaTittaBackend.model;
 
 import java.sql.Date;
 import java.util.List;

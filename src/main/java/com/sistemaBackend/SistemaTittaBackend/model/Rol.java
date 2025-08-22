@@ -1,7 +1,6 @@
-package com.sistemaBackend.SistemaTittaBackend.modelo;
+package com.sistemaBackend.SistemaTittaBackend.model;
 
-import com.sistemaBackend.SistemaTittaBackend.modelo.enums.RolEnum;
-
+import com.sistemaBackend.SistemaTittaBackend.model.enums.RolEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 
