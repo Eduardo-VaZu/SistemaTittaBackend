@@ -34,8 +34,8 @@ public class Usuario {
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private Date fechaRegistro;
 
-    @Column(name = "estado", nullable = false, length = 5)
-    private boolean estado;
+    @Column(name = "estado_usuario", nullable = false, length = 5)
+    private boolean estadoUsuario;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rol> roles;
