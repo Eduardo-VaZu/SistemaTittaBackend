@@ -18,6 +18,7 @@ public class Rol {
     @Column(name = "id_rol")
     private Long idRol;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "nombre_rol", nullable = false, unique = true, length = 50)
     private RolEnum nombreRol;
 
