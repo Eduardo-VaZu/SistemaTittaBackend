@@ -19,6 +19,7 @@ public class CredencialTradicional {
 
     @OneToOne
     @MapsId
+    @JoinColumn(name = "id_usuario")
     @EqualsAndHashCode.Exclude
     private Usuario usuario;
 

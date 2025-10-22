@@ -23,7 +23,7 @@ public class ImagenProducto {
     @EqualsAndHashCode.Exclude
     private Producto producto;
 
-    @Column(name = "imagenUrl", nullable = false)
+    @Column(name = "imagen_url", nullable = false)
     private String imagenUrl;
 
 }
