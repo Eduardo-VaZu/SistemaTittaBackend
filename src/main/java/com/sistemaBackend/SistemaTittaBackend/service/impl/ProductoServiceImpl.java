@@ -1,6 +1,8 @@
 package com.sistemaBackend.SistemaTittaBackend.service.impl;
 
+import com.sistemaBackend.SistemaTittaBackend.model.Categoria;
 import com.sistemaBackend.SistemaTittaBackend.model.Producto;
+import com.sistemaBackend.SistemaTittaBackend.repository.CategoriaRepository;
 import com.sistemaBackend.SistemaTittaBackend.repository.ProductoRepository;
 import com.sistemaBackend.SistemaTittaBackend.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Override
     public Producto crearProducto(Producto producto) {
@@ -42,6 +46,15 @@ public class ProductoServiceImpl implements ProductoService {
         producto.setPrecio(productoDetails.getPrecio());
         producto.setEstadoProducto(productoDetails.isEstadoProducto());
 
+        return productoRepository.save(producto);
+    }
+
+    @Override
+    public Producto actualizarCategoriaDeProducto(Long idProducto, Long idCategoria) {
+        Producto producto = obtenerProductoPorId(idProducto);
+        Categoria nuevaCategoria = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+        producto.setCategoria(nuevaCategoria);
         return productoRepository.save(producto);
     }
 

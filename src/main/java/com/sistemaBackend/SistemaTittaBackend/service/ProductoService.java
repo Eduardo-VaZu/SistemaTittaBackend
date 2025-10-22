@@ -10,6 +10,7 @@ public interface ProductoService {
     List<Producto> obtenerTodosLosProductos();
     Producto obtenerProductoPorId(Long idProducto);
     Producto actualizarProducto(Long idProducto, Producto productoDetails);
+    Producto actualizarCategoriaDeProducto(Long idProducto, Long idCategoria);
     void eliminarProducto(Long idProducto);
 
 }

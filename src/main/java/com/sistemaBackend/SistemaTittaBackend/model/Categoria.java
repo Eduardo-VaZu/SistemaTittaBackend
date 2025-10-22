@@ -1,5 +1,6 @@
 package com.sistemaBackend.SistemaTittaBackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Categoria {
     @Column(name = "nombre_categoria", nullable = false, unique = true, length = 50)
     private String nombreCategoria;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private List<Producto> productos;

@@ -39,6 +39,12 @@ public class ProductoController {
         return ResponseEntity.ok(productoActualizado);
     }
 
+    @PatchMapping("/{idProducto}/categoria")
+    public ResponseEntity<Producto> actualizarCategoriaProducto(@PathVariable Long idProducto, @RequestBody Long idCategoria) {
+        Producto productoActualizado = productoService.actualizarCategoriaDeProducto(idProducto, idCategoria);
+        return ResponseEntity.ok(productoActualizado);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         productoService.eliminarProducto(id);

@@ -13,5 +13,5 @@ public class ProductoDTO {
     private String descripcion;
     private Double precio;
     private String imagen;
-    private Long idCategoria;
+    private String idCategoria;
 }
