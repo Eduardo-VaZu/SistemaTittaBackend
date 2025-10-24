@@ -38,7 +38,6 @@ public class Producto {
     @Column(name = "estado_producto", nullable = false, length = 5)
     private boolean estadoProducto;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", nullable = false)
     @EqualsAndHashCode.Exclude
