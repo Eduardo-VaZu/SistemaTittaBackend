@@ -1,5 +1,6 @@
 package com.sistemaBackend.SistemaTittaBackend.controller;
 
+import com.sistemaBackend.SistemaTittaBackend.dto.request.ProductoConStockDTO;
 import com.sistemaBackend.SistemaTittaBackend.model.Producto;
 import com.sistemaBackend.SistemaTittaBackend.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,11 @@ public class ProductoController {
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long idProducto) {
         productoService.eliminarProducto(idProducto);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/lote")
+    public ResponseEntity<List<Producto>> crearProductos(@RequestBody List<ProductoConStockDTO> productosDTO) {
+        List<Producto> nuevosProductos = productoService.crearProductos(productosDTO);
+        return new ResponseEntity<>(nuevosProductos, HttpStatus.CREATED);
     }
 }

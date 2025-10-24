@@ -21,15 +21,9 @@ public class CategoriaController {
         return categoriaService.obtenerTodosLasCategorias();
     }
 
-    @GetMapping("/{idCategoria}")
-    private ResponseEntity<Categoria> obtenerCategoriaPorId(@PathVariable Long idCategoria){
-        Categoria categoria = categoriaService.obtenerCategoriaPorId(idCategoria);
-        return ResponseEntity.ok(categoria);
-    }
-
     @PostMapping
     private ResponseEntity<Categoria> crearCategoria(@RequestBody Categoria categoria){
-        Categoria categori = categoriaService.crearCategoria(categoria);
-        return new ResponseEntity<>(categori, HttpStatus.CREATED);
+        Categoria categoriaCreada = categoriaService.crearCategoria(categoria);
+        return new ResponseEntity<>(categoriaCreada, HttpStatus.CREATED);
     }
 }

@@ -26,18 +26,4 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    @Override
-    public Categoria obtenerCategoriaPorId(Long idCategoria) {
-        return null;
-    }
-
-    @Override
-    public Categoria actualizarCategoria(Long idCategoria, Categoria categoriaDetails) {
-        return null;
-    }
-
-    @Override
-    public void eliminarCategoria(Long idCategoria) {
-
-    }
 }

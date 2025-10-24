@@ -5,7 +5,7 @@
 -- Entidad: Rol
 CREATE TABLE tbl_rol (
                          id_rol BIGINT AUTO_INCREMENT PRIMARY KEY,
-                         nombre_rol VARCHAR(50) NOT NULL UNIQUE
+                         nombre_rol ENUM('ADMINISTRADOR', 'CLIENTE', 'EMPLEADO') NOT NULL UNIQUE
 );
 
 -- Entidad: Categoria

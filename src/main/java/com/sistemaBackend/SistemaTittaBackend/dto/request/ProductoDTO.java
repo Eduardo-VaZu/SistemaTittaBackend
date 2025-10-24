@@ -14,4 +14,5 @@ public class ProductoDTO {
     private Double precio;
     private String imagen;
     private String idCategoria;
+
 }
