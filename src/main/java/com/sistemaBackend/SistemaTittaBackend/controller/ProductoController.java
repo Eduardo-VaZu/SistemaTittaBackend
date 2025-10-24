@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/producto")
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 public class ProductoController {
 
     @Autowired
@@ -33,9 +34,9 @@ public class ProductoController {
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @RequestBody Producto productoDetails) {
-        Producto productoActualizado = productoService.actualizarProducto(id, productoDetails);
+    @PutMapping("/{idProducto}")
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long idProducto, @RequestBody Producto productoDetails) {
+        Producto productoActualizado = productoService.actualizarProducto(idProducto, productoDetails);
         return ResponseEntity.ok(productoActualizado);
     }
 
@@ -45,9 +46,9 @@ public class ProductoController {
         return ResponseEntity.ok(productoActualizado);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
-        productoService.eliminarProducto(id);
+    @DeleteMapping("/{idProducto}")
+    public ResponseEntity<Void> eliminarProducto(@PathVariable Long idProducto) {
+        productoService.eliminarProducto(idProducto);
         return ResponseEntity.noContent().build();
     }
 }
