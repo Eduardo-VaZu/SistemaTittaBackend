@@ -1,5 +1,7 @@
 package com.sistemaBackend.SistemaTittaBackend.controller;
 
+import com.sistemaBackend.SistemaTittaBackend.dto.request.ProductoDTO;
+import com.sistemaBackend.SistemaTittaBackend.dto.response.ProductoResponseDTO;
 import com.sistemaBackend.SistemaTittaBackend.model.Producto;
 import com.sistemaBackend.SistemaTittaBackend.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,31 +20,25 @@ public class ProductoController {
     private ProductoService productoService;
 
     @GetMapping
-    public List<Producto> obtenerTodosLosProductos() {
+    public List<ProductoResponseDTO> obtenerTodosLosProductos() {
         return productoService.obtenerTodosLosProductos();
     }
 
     @GetMapping("/{idProducto}")
-    private ResponseEntity<Producto> obtenerProducto(@PathVariable Long idProducto) {
-        Producto producto = productoService.obtenerProductoPorId(idProducto);
+    private ResponseEntity<ProductoResponseDTO> obtenerProducto(@PathVariable Long idProducto) {
+        ProductoResponseDTO producto = productoService.obtenerProductoPorId(idProducto);
         return ResponseEntity.ok(producto);
     }
 
     @PostMapping
-    public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
-        Producto nuevoProducto = productoService.crearProducto(producto);
+    public ResponseEntity<ProductoResponseDTO> crearProducto(@RequestBody ProductoDTO producto) {
+        ProductoResponseDTO nuevoProducto = productoService.crearProducto(producto);
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{idProducto}")
-    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long idProducto, @RequestBody Producto productoDetails) {
-        Producto productoActualizado = productoService.actualizarProducto(idProducto, productoDetails);
-        return ResponseEntity.ok(productoActualizado);
-    }
-
-    @PatchMapping("/{idProducto}/categoria")
-    public ResponseEntity<Producto> actualizarCategoriaProducto(@PathVariable Long idProducto, @RequestBody Long idCategoria) {
-        Producto productoActualizado = productoService.actualizarCategoriaDeProducto(idProducto, idCategoria);
+    public ResponseEntity<ProductoResponseDTO> actualizarProducto(@PathVariable Long idProducto, @RequestBody ProductoDTO productoDetails) {
+        ProductoResponseDTO productoActualizado = productoService.actualizarProducto(idProducto, productoDetails);
         return ResponseEntity.ok(productoActualizado);
     }
 

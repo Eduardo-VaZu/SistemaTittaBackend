@@ -1,18 +1,18 @@
+// dto/request/ProductoRequestDTO.java
 package com.sistemaBackend.SistemaTittaBackend.dto.request;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductoDTO {
     private String nombreProducto;
     private String sku;
     private String descripcion;
-    private Double precio;
-    private String imagen;
-    private String idCategoria;
-
+    private BigDecimal precio;
+    private boolean estadoProducto;
+    private Long idCategoria;
+    private ImagenProductoDTO imagen;
+    private List<StockSedeDTO> stocks;
 }

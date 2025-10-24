@@ -1,10 +1,9 @@
 package com.sistemaBackend.SistemaTittaBackend.service.impl;
 
-import com.sistemaBackend.SistemaTittaBackend.dto.request.HorarioOperacionSedeDTO;
 import com.sistemaBackend.SistemaTittaBackend.dto.request.SedeDTO;
 import com.sistemaBackend.SistemaTittaBackend.dto.response.SedeResponseDTO;
 import com.sistemaBackend.SistemaTittaBackend.exception.ResourceNotFoundException;
-import com.sistemaBackend.SistemaTittaBackend.mapper.SedeMapper;
+import com.sistemaBackend.SistemaTittaBackend.mapper.Mapper;
 import com.sistemaBackend.SistemaTittaBackend.model.Direccion;
 import com.sistemaBackend.SistemaTittaBackend.model.HorarioOperacionSede;
 import com.sistemaBackend.SistemaTittaBackend.model.Sede;
@@ -24,11 +23,11 @@ public class SedeServiceImpl implements SedeService {
     @Autowired
     private SedeRepository sedeRepository;
     @Autowired
-    private SedeMapper sedeMapper;
+    private Mapper sedeMapper;
 
     @Override
     @Transactional
-    public Sede crearSede(SedeDTO sedeDTO) {
+    public SedeResponseDTO crearSede(SedeDTO sedeDTO) {
         Sede sede = new Sede();
         sede.setNombreSede(sedeDTO.getNombreSede());
         sede.setTelefono(sedeDTO.getTelefono());
@@ -53,24 +52,30 @@ public class SedeServiceImpl implements SedeService {
             });
         }
 
-        return sedeRepository.save(sede);
+        Sede sedeGuardada = sedeRepository.save(sede);
+        return sedeMapper.toSedeResponseDTO(sedeGuardada);
     }
 
     @Override
-    public List<Sede> obtenerTodosLasSedes() {
-        return sedeRepository.findAll();
+    public List<SedeResponseDTO> obtenerTodosLasSedes() {
+        return sedeRepository.findAll()
+                .stream()
+                .map(sedeMapper::toSedeResponseDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Sede obtenerSedePorId(Long id) {
-        return sedeRepository.findById(id)
+    public SedeResponseDTO obtenerSedePorId(Long id) {
+        sedeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sede no encontrada con id: " + id));
+        return sedeMapper.toSedeResponseDTO(sedeRepository.findById(id).get());
     }
 
     @Override
     @Transactional
-    public Sede actualizarSede(Long id, SedeDTO sedeDTO) {
-        Sede sede = obtenerSedePorId(id);
+    public SedeResponseDTO actualizarSede(Long id, SedeDTO sedeDTO) {
+        Sede sede = sedeRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Sede no encontrada con id: " + id));
         sede.setNombreSede(sedeDTO.getNombreSede());
         sede.setTelefono(sedeDTO.getTelefono());
         sede.setEstado(sedeDTO.getEstado());
@@ -93,29 +98,16 @@ public class SedeServiceImpl implements SedeService {
                 sede.getHorariosOperacion().add(horario);
             });
         }
+        Sede sedeGuardada = sedeRepository.save(sede);
 
-        return sedeRepository.save(sede);
+        return sedeMapper.toSedeResponseDTO(sedeGuardada);
     }
 
     @Override
     public void eliminarSede(Long id) {
-        Sede sede = obtenerSedePorId(id);
-        sedeRepository.delete(sede);
-    }
-
-    @Override
-    public List<SedeResponseDTO> obtenerTodasLasSedes() {
-        return sedeRepository.findAll()
-                .stream()
-                .map(sedeMapper::toSedeResponseDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public SedeResponseDTO obtenerSedePorIdResponse(Long id) {
         Sede sede = sedeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Sede no encontrada con id: " + id));
-        return sedeMapper.toSedeResponseDTO(sede);
+        sedeRepository.delete(sede);
     }
 
 }

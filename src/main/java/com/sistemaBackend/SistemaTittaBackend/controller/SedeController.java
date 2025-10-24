@@ -20,24 +20,24 @@ public class SedeController {
 
     @GetMapping
     public List<SedeResponseDTO> obtenerTodasLasSedes() {
-        return sedeService.obtenerTodasLasSedes();
+        return sedeService.obtenerTodosLasSedes();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SedeResponseDTO> obtenerSedePorId(@PathVariable Long id) {
-        SedeResponseDTO sede = sedeService.obtenerSedePorIdResponse(id);
+        SedeResponseDTO sede = sedeService.obtenerSedePorId(id);
         return ResponseEntity.ok(sede);
     }
 
     @PostMapping
-    public ResponseEntity<Sede> crearSede(@RequestBody SedeDTO sedeDTO) {
-        Sede sedeCreada = sedeService.crearSede(sedeDTO);
+    public ResponseEntity<SedeResponseDTO> crearSede(@RequestBody SedeDTO sedeDTO) {
+        SedeResponseDTO sedeCreada = sedeService.crearSede(sedeDTO);
         return new ResponseEntity<>(sedeCreada, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Sede> actualizarSede(@PathVariable Long id, @RequestBody SedeDTO sedeDTO) {
-        Sede sedeActualizada = sedeService.actualizarSede(id, sedeDTO);
+    public ResponseEntity<SedeResponseDTO> actualizarSede(@PathVariable Long id, @RequestBody SedeDTO sedeDTO) {
+        SedeResponseDTO sedeActualizada = sedeService.actualizarSede(id, sedeDTO);
         return ResponseEntity.ok(sedeActualizada);
     }
 

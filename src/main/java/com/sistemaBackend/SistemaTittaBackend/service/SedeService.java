@@ -8,11 +8,10 @@ import java.util.List;
 
 public interface SedeService {
 
-    Sede crearSede(SedeDTO sedeDTO);
-    List<Sede> obtenerTodosLasSedes();
-    Sede obtenerSedePorId(Long id);
-    Sede actualizarSede(Long id, SedeDTO sedeDTO);
+    SedeResponseDTO crearSede(SedeDTO sedeDTO);
+    List<SedeResponseDTO> obtenerTodosLasSedes();
+    SedeResponseDTO obtenerSedePorId(Long id);
+    SedeResponseDTO actualizarSede(Long id, SedeDTO sedeDTO);
     void eliminarSede(Long id);
-    List<SedeResponseDTO> obtenerTodasLasSedes();
-    SedeResponseDTO obtenerSedePorIdResponse(Long id);
+
 }

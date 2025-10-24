@@ -1,6 +1,9 @@
 package com.sistemaBackend.SistemaTittaBackend.service.impl;
 
+import com.sistemaBackend.SistemaTittaBackend.dto.request.ProductoDTO;
+import com.sistemaBackend.SistemaTittaBackend.dto.response.ProductoResponseDTO;
 import com.sistemaBackend.SistemaTittaBackend.exception.ResourceNotFoundException;
+import com.sistemaBackend.SistemaTittaBackend.mapper.Mapper;
 import com.sistemaBackend.SistemaTittaBackend.model.*;
 import com.sistemaBackend.SistemaTittaBackend.repository.CategoriaRepository;
 import com.sistemaBackend.SistemaTittaBackend.repository.ProductoRepository;
@@ -23,62 +26,75 @@ public class ProductoServiceImpl implements ProductoService {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private SedeRepository sedeRepository;
+    @Autowired
+    private Mapper productoMapper;
+
 
     @Override
-    @Transactional
-    public Producto crearProducto(Producto producto) {
-        productoRepository.findBySku(producto.getSku()).ifPresent(p -> {
-            throw new RuntimeException("SKU ya existe");
-        });
+    public ProductoResponseDTO crearProducto(ProductoDTO productoDTO) {
+        Producto producto = new Producto();
+        producto.setNombreProducto(productoDTO.getNombreProducto());
+        producto.setSku(productoDTO.getSku());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setEstadoProducto(productoDTO.isEstadoProducto());
 
-        if (producto.getImagen() != null) {
-            producto.getImagen().setProducto(producto);
-        }
+        Categoria categoria = new Categoria();
+        categoria.setIdCategoria(productoDTO.getIdCategoria());
+        producto.setCategoria(categoria);
 
-        if (producto.getStocks() != null) {
-            producto.getStocks().forEach(stock -> stock.setProducto(producto));
-        }
+        ImagenProducto imagen = new ImagenProducto();
+        imagen.setImagenUrl(productoDTO.getImagen().getImagenUrl());
+        producto.setImagen(imagen);
 
-        return productoRepository.save(producto);
-    }
+        Producto guardarProducto = productoRepository.save(producto);
 
-    
-
-    @Override
-    public List<Producto> obtenerTodosLosProductos() {
-        return productoRepository.findAll();
-    }
-
-    @Override
-    public Producto obtenerProductoPorId(Long idProducto) {
-        return productoRepository.findById(idProducto)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        return productoMapper.toProductoResponseDTO(guardarProducto);
     }
 
     @Override
-    public Producto actualizarProducto(Long idProducto, Producto productoDetails) {
-        Producto producto = obtenerProductoPorId(idProducto);
-
-        producto.setNombreProducto(productoDetails.getNombreProducto());
-        producto.setDescripcion(productoDetails.getDescripcion());
-        producto.setPrecio(productoDetails.getPrecio());
-        producto.setEstadoProducto(productoDetails.isEstadoProducto());
-
-        return productoRepository.save(producto);
+    public List<ProductoResponseDTO> obtenerTodosLosProductos() {
+        return productoRepository.findAll()
+                .stream()
+                .map(productoMapper::toProductoResponseDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Producto actualizarCategoriaDeProducto(Long idProducto, Long idCategoria) {
-        Producto producto = obtenerProductoPorId(idProducto);
-        Categoria nuevaCategoria = categoriaRepository.findById(idCategoria)
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-        producto.setCategoria(nuevaCategoria);
-        return productoRepository.save(producto);
+    public ProductoResponseDTO obtenerProductoPorId(Long idProducto) {
+        productoRepository.findById(idProducto)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + idProducto));
+        return productoMapper.toProductoResponseDTO(productoRepository.findById(idProducto).get());
+    }
+
+    @Override
+    public ProductoResponseDTO actualizarProducto(Long idProducto, ProductoDTO productoDTO) {
+        Producto producto = productoRepository.findById(idProducto)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + idProducto));
+
+        producto.setNombreProducto(productoDTO.getNombreProducto());
+        producto.setSku(productoDTO.getSku());
+        producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setEstadoProducto(productoDTO.isEstadoProducto());
+
+        Categoria categoria = new Categoria();
+        categoria.setIdCategoria(productoDTO.getIdCategoria());
+        producto.setCategoria(categoria);
+
+        ImagenProducto imagen = new ImagenProducto();
+        imagen.setImagenUrl(productoDTO.getImagen().getImagenUrl());
+        producto.setImagen(imagen);
+
+        Producto guardarProducto = productoRepository.save(producto);
+
+        return productoMapper.toProductoResponseDTO(guardarProducto);
     }
 
     @Override
     public void eliminarProducto(Long idProducto) {
-        Producto producto = obtenerProductoPorId(idProducto);
-        productoRepository.delete(producto);
+        productoRepository.findById(idProducto)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + idProducto));
+        productoRepository.deleteById(idProducto);
     }
 }
