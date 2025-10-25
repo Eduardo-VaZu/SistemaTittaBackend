@@ -1,4 +1,3 @@
-// dto/request/ProductoRequestDTO.java
 package com.sistemaBackend.SistemaTittaBackend.dto.request;
 
 import lombok.Data;
@@ -12,7 +11,7 @@ public class ProductoDTO {
     private String descripcion;
     private BigDecimal precio;
     private boolean estadoProducto;
-    private Long idCategoria;
+    private CategoriaDTO categoria;
     private ImagenProductoDTO imagen;
     private List<StockSedeDTO> stocks;
 }

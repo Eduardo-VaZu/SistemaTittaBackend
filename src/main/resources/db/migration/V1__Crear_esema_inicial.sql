@@ -57,7 +57,7 @@ CREATE TABLE tbl_usuario (
 CREATE TABLE tbl_sede (
                           id_sede BIGINT AUTO_INCREMENT PRIMARY KEY,
                           nombre_sede VARCHAR(100) NOT NULL UNIQUE,
-                          telefono BIGINT UNIQUE,
+                          telefono VARCHAR(20) UNIQUE,
                           estado BOOLEAN NOT NULL,
                           id_direccion BIGINT NOT NULL,
                           CONSTRAINT fk_sede_direccion FOREIGN KEY (id_direccion) REFERENCES tbl_direccion(id_direccion)

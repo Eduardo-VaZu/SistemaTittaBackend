@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SedeDTO {
     private String nombreSede;
-    private Long telefono;
+    private String telefono;
     private Boolean estado;
     private DireccionDTO direccion;
     private List<HorarioOperacionSedeDTO> horariosOperacion;

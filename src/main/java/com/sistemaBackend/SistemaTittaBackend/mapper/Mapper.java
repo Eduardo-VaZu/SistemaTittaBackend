@@ -82,9 +82,19 @@ public class Mapper {
 
     private StockSedeResponseDTO toStockSedeResponseDTO(StockSede stock) {
         StockSedeResponseDTO dto = new StockSedeResponseDTO();
-        dto.setIdProducto(stock.getProducto().getIdProducto());
+
         dto.setIdSede(stock.getSede().getIdSede());
         dto.setCantidad(stock.getCantidad());
+        return dto;
+    }
+
+    public CategoriaResponseDTO toCategoriaResponseDTO(Categoria categoria) {
+        if (categoria == null) {
+            return null;
+        }
+        CategoriaResponseDTO dto = new CategoriaResponseDTO();
+        dto.setIdCategoria(categoria.getIdCategoria());
+        dto.setNombreCategoria(categoria.getNombreCategoria());
         return dto;
     }
 }

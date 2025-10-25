@@ -26,7 +26,7 @@ public class Sede {
     private String nombreSede;
 
     @Column(name = "telefono", unique = true, length = 20)
-    private Long telefono;
+    private String telefono;
 
     @Column(name = "estado", nullable = false, length = 50)
     private Boolean estado;

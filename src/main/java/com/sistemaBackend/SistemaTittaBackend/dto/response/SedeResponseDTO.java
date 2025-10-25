@@ -7,7 +7,7 @@ import java.util.List;
 public class SedeResponseDTO {
     private Long idSede;
     private String nombreSede;
-    private Long telefono;
+    private String telefono;
     private Boolean estado;
     private DireccionResponseDTO direccion;
     private List<HorarioOperacionSedeResponseDTO> horariosOperacion;
